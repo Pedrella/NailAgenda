@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Agendamento - NailAgenda</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #fdf6f8;
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #444;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        header h1 {
+            color: #c45b83;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .card h2 {
+            color: #c45b83;
+            margin-bottom: 25px;
+            font-size: 21px;
+        }
+
+        .campo {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ead5de;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+            background: white;
+            color: #444;
+            transition: 0.2s;
+        }
+
+        input:focus, select:focus {
+            border-color: #c45b83;
+            box-shadow: 0 0 0 3px rgba(196, 91, 131, 0.12);
+        }
+
+        .botoes {
+            display: flex;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        button, .voltar {
+            flex: 1;
+            padding: 13px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        button {
+            background: #c45b83;
+            color: white;
+            border: none;
+        }
+
+        button:hover {
+            background: #ad466e;
+        }
+
+        .voltar {
+            background: #f5e7ed;
+            color: #a34d70;
+        }
+
+        .voltar:hover {
+            background: #edd5df;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 25px 20px;
+            }
+
+            .botoes {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header>
+            <h1>♡ NailAgenda</h1>
+            <p>Gerenciamento do seu estúdio</p>
+        </header>
+
+        <div class="card">
+
+            <h2>Editar agendamento</h2>
+
+            <form method="POST">
+
+                <div class="campo">
+                    <label>Cliente:</label>
+
+                    <select name="cliente_id" required>
+                        {% for cliente in clientes %}
+                            <option value="{{ cliente.id }}"
+                                {% if cliente.id == agendamento.cliente_id %}
+                                    selected
+                                {% endif %}>
+                                {{ cliente.nome }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label>Serviço:</label>
+
+                    <select name="servico_id" required>
+                        {% for servico in servicos %}
+                            <option value="{{ servico.id }}"
+                                {% if servico.id == agendamento.servico_id %}
+                                    selected
+                                {% endif %}>
+                                {{ servico.nome }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label>Data:</label>
+
+                    <input type="date" name="data"
+                           value="{{ agendamento.data.strftime('%Y-%m-%d') }}"
+                           required>
+                </div>
+
+                <div class="campo">
+                    <label>Horário:</label>
+
+                    <input type="time" name="horario"
+       value="{{ agendamento.horario.strftime('%H:%M') }}"
+       required>
+                </div>
+
+                <div class="botoes">
+                    <button type="submit">Salvar alterações</button>
+
+                    <a href="{{ url_for('agendamentos') }}" class="voltar">
+                        Voltar
+                    </a>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

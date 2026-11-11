@@ -1,0 +1,331 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Serviços | NailAgenda</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: #fdf6f8;
+            color: #59434d;
+            padding: 30px 6%;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .logo {
+            color: #9d5578;
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #d99bb5;
+        }
+
+        .voltar {
+            color: #9d5578;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #8f496b;
+            margin-bottom: 8px;
+        }
+
+        .subtitulo {
+            color: #927d87;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            border-radius: 15px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.04);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #9d5578;
+            font-size: 20px;
+            margin-bottom: 22px;
+        }
+
+        .formulario {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 18px;
+        }
+
+        .campo {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input {
+            padding: 13px;
+            border: 1px solid #ead8e0;
+            border-radius: 9px;
+            outline: none;
+            font-size: 15px;
+            width: 100%;
+        }
+
+        input:focus {
+            border-color: #bd7d9b;
+        }
+
+        button {
+            background: #9d5578;
+            color: white;
+            border: none;
+            padding: 13px 22px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #81415f;
+        }
+
+        .tabela-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+        }
+
+        th {
+            background: #f9edf2;
+            color: #8f496b;
+            text-align: left;
+            padding: 15px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #f0e5ea;
+        }
+
+        tr:hover td {
+            background: #fffafd;
+        }
+
+        .preco {
+            color: #9d5578;
+            font-weight: bold;
+        }
+
+        .duracao {
+            color: #806d76;
+        }
+
+        .editar {
+            color: #9d5578;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        .excluir {
+            display: inline;
+        }
+
+        .excluir button {
+            background: #f4e2e9;
+            color: #a14d70;
+            padding: 8px 12px;
+        }
+
+        .excluir button:hover {
+            background: #edcbd9;
+        }
+
+        .rodape {
+            text-align: center;
+            color: #aa929d;
+            font-size: 13px;
+            padding: 20px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 22px 4%;
+            }
+
+            header {
+                gap: 15px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Nail<span>Agenda</span></div>
+
+        <a href="{{ url_for('dashboard') }}" class="voltar">
+            ← Voltar ao painel
+        </a>
+    </header>
+
+    <main>
+
+        <h1>Gerenciamento de Serviços</h1>
+
+        <p class="subtitulo">
+            Cadastre procedimentos, organize preços e controle a duração dos serviços.
+        </p>
+
+        <section class="card">
+
+            <h2>+ Novo serviço</h2>
+
+            <form method="POST" class="formulario">
+
+                <div class="campo">
+                    <label>Nome do serviço</label>
+                    <input type="text" name="nome"
+                           placeholder="Ex: Alongamento em gel" required>
+                </div>
+
+                <div class="campo">
+                    <label>Descrição</label>
+                    <input type="text" name="descricao"
+                           placeholder="Descreva o procedimento">
+                </div>
+
+                <div class="campo">
+                    <label>Preço (R$)</label>
+                    <input type="number" name="preco"
+                           step="0.01" min="0" placeholder="0,00" required>
+                </div>
+
+                <div class="campo">
+                    <label>Duração (minutos)</label>
+                    <input type="number" name="duracao"
+                           min="1" placeholder="Ex: 90" required>
+                </div>
+
+                <div class="campo">
+                    <label>&nbsp;</label>
+                    <button type="submit">Cadastrar serviço</button>
+                </div>
+
+            </form>
+
+        </section>
+
+        <section class="card">
+
+            <h2>Serviços cadastrados</h2>
+
+            <div class="tabela-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Serviço</th>
+                            <th>Descrição</th>
+                            <th>Preço</th>
+                            <th>Duração</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for servico in servicos %}
+
+                        <tr>
+                            <td>{{ servico.id }}</td>
+                            <td>{{ servico.nome }}</td>
+                            <td>{{ servico.descricao or "" }}</td>
+
+                            <td class="preco">
+                                R$ {{ "%.2f"|format(servico.preco) }}
+                            </td>
+
+                            <td class="duracao">
+                                {{ servico.duracao }} minutos
+                            </td>
+
+                            <td>
+                                <a href="{{ url_for('editar_servico', id=servico.id) }}"
+                                   class="editar">
+                                    Editar
+                                </a>
+
+                                <form method="POST"
+                                      action="{{ url_for('excluir_servico', id=servico.id) }}"
+                                      class="excluir"
+                                      onsubmit="return confirm('Deseja realmente excluir este serviço?')">
+
+                                    <button type="submit">Excluir</button>
+
+                                </form>
+                            </td>
+                        </tr>
+
+                        {% else %}
+
+                        <tr>
+                            <td colspan="6">
+                                Nenhum serviço cadastrado ainda.
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="rodape">
+        © 2026 NailAgenda — Organização e beleza em um só lugar.
+    </footer>
+
+</body>
+</html>

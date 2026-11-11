@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NailAgenda | Seu espaço de beleza</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        body {
+            background: #fdf6f8;
+            color: #59434d;
+            min-height: 100vh;
+        }
+
+        header {
+            background: white;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+
+        .logo {
+            color: #9d5578;
+            font-size: 27px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: #d99bb5;
+        }
+
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 8%;
+        }
+
+        .conteudo {
+            max-width: 650px;
+            text-align: center;
+        }
+
+        .destaque {
+            color: #b76d91;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 52px;
+            color: #8f496b;
+            line-height: 1.2;
+            margin-bottom: 25px;
+        }
+
+        h1 span {
+            color: #d28eaa;
+        }
+
+        .descricao {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #806d76;
+            margin-bottom: 38px;
+        }
+
+        .botao {
+            display: inline-block;
+            background: #9d5578;
+            color: white;
+            text-decoration: none;
+            padding: 16px 35px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(157,85,120,0.2);
+        }
+
+        .botao:hover {
+            background: #81415f;
+            transform: translateY(-3px);
+        }
+
+        .rodape {
+            text-align: center;
+            padding: 20px;
+            color: #aa929d;
+            font-size: 13px;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 38px;
+            }
+
+            .descricao {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">Nail<span>Agenda</span></div>
+    </header>
+
+    <main class="hero">
+
+        <div class="conteudo">
+
+            <p class="destaque">Beleza, organização e cuidado</p>
+
+            <h1>
+                Bem-vinda ao <span>NailAgenda!</span>
+            </h1>
+
+            <p class="descricao">
+                Seu espaço de beleza merece uma gestão especial.
+                Organize seus clientes, gerencie seus serviços e
+                mantenha todos os agendamentos em um só lugar.
+            </p>
+
+            <a href="/dashboard" class="botao">
+                Acessar painel administrativo →
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer class="rodape">
+        © 2026 NailAgenda — Organização e beleza em um só lugar.
+    </footer>
+
+</body>
+</html>
